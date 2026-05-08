@@ -31,9 +31,10 @@ class ContactViewModel(application: Application) : AndroidViewModel(application)
 
     val contacts = repository.contacts.asLiveData()
 
-    fun saveContact(contact: Contact) {
+    fun saveContact(contact: Contact, onSaved: (() -> Unit)? = null) {
         viewModelScope.launch {
             repository.insert(contact)
+            onSaved?.invoke()
         }
     }
 

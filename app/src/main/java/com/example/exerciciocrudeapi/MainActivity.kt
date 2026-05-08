@@ -46,7 +46,10 @@ fun MainScreen(viewModel: ContactViewModel) {
     var showForm by remember { mutableStateOf(false) }
 
     if (showForm) {
-        ContactFormScreen(viewModel)
+        ContactFormScreen(
+            viewModel = viewModel,
+            onSaved = { showForm = false }
+        )
     } else {
         Column(
             modifier = Modifier
