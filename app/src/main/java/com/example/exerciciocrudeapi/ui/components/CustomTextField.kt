@@ -12,12 +12,14 @@ import androidx.compose.ui.unit.dp
 fun CustomTextField(
     value: String,
     onValueChange: (String) -> Unit,
-    label: String
+    label: String,
+    readOnly: Boolean = false
 ) {
     OutlinedTextField(
         value = value,
         onValueChange = onValueChange,
         label = { Text(label) },
+        readOnly = readOnly,
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)

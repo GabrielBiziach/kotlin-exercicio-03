@@ -35,20 +35,32 @@ fun ContactFormScreen(viewModel: ContactViewModel) {
 
         CustomTextField(nome, { nome = it }, "Nome")
         CustomTextField(email, { email = it }, "Email")
-        CustomTextField(telefone, { telefone = it }, "Telefone")
-        CustomTextField(nascimento, { nascimento = it }, "Nascimento")
+        CustomTextField(
+            telefone,
+            { telefone = it.filter(Char::isDigit) },
+            "Telefone"
+        )
+        CustomTextField(
+            nascimento,
+            { nascimento = it.filter(Char::isDigit) },
+            "Nascimento"
+        )
 
-        CustomTextField(cep, { cep = it }, "CEP")
+        CustomTextField(
+            cep,
+            { cep = it.filter(Char::isDigit) },
+            "CEP"
+        )
 
         Button(
             onClick = {
                 if (cep.length == 8) {
                     viewModel.searchCep(cep) { result ->
                         result?.let {
-                            bairro = it.bairro ?: ""
-                            logradouro = it.logradouro ?: ""
-                            cidade = it.localidade ?: ""
-                            estado = it.uf ?: ""
+                            bairro = it.bairro
+                            logradouro = it.logradouro
+                            cidade = it.localidade
+                            estado = it.uf
                         }
                     }
                 }
@@ -60,11 +72,11 @@ fun ContactFormScreen(viewModel: ContactViewModel) {
             Text("Buscar CEP")
         }
 
-        CustomTextField(bairro, { bairro = it }, "Bairro")
-        CustomTextField(logradouro, { logradouro = it }, "Logradouro")
+        CustomTextField(bairro, { bairro = it }, "Bairro", readOnly = true)
+        CustomTextField(logradouro, { logradouro = it }, "Logradouro", readOnly = true)
         CustomTextField(numero, { numero = it }, "Número")
-        CustomTextField(estado, { estado = it }, "Estado")
-        CustomTextField(cidade, { cidade = it }, "Cidade")
+        CustomTextField(estado, { estado = it }, "Estado", readOnly = true)
+        CustomTextField(cidade, { cidade = it }, "Cidade", readOnly = true)
 
         Button(
             onClick = {
